@@ -1,0 +1,10 @@
+#include<linux/init.h>
+#include<linux/module.h>
+#include<linux/proc_fs.h>
+#include<linux/sched.h>
+#include<asm/uaccess.h>
+MODULE_LICENSE("GPL");
+#define BUFSIZE 1024
+static char global_buffer[BUFSIZE];
+static struct proc_dir_entry*example_dir,*hello_file,*current_file,*symlink;
+static int proc_read_current(char*page,char**start,off_toff,int count,int*eof,void*date)
