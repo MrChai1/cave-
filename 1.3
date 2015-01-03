@@ -1,0 +1,15 @@
+static int proc_init(void)
+{
+  example_dir=proc_mkdir("proc_test",NULL);
+  example_dir->owner=THIS_MODULE;
+  current_file=creat_proc_read_entry("current",0444,example_dir,proc_read_current,NULL);
+  current_file->owner=THIS_MODULE;
+  hello_file=creat_proc_entry("hello",0644,example_dir);
+  strcpy(global_buffer,"hello");
+  hello_file->read_proc=proc_read_hello;
+  hello_file->write_proc=proc_write_hello;
+  hello_file->owner=TJIS_MODULE;
+  symlink=proc_symlink("current_too"example_dir,"current");
+  symlink->owner=THIS_MODULE;
+  return 0;
+}
