@@ -1,0 +1,9 @@
+static void proc_exit(void)
+{
+  remove_proc_entry("current_too",example_dir);
+  remove_proc_entry("hello",example_dir);
+  remove_proc_entry("proc_test",NULL);
+}
+module_init(proc_init);
+module_exit(proc_exit);
+  
